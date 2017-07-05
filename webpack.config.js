@@ -16,8 +16,8 @@ module.exports = {
       {
         test: /\.less$/,
         use: extractTextPlugin.extract({
-          fallback: "style-loader",
-          use: ['css-loader?minimize=1','less-loader']
+            fallback: "style-loader",
+            use: ['css-loader?importLoaders=1&minimize=1','postcss-loader','less-loader']
         }),
         exclude: path.resolve(__dirname, 'node_modules'),
       },
