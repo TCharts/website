@@ -53,6 +53,6 @@ module.exports = {
     // 打开浏览器
     new openBrowserPlugin({
       url: 'http://localhost:8080'
-    }),
+    })
   ]
 }
