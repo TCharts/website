@@ -1,0 +1,110 @@
+@import 'variables.less';
+@import 'animation.less';
+@import 'components.less';
+
+// 总首页样式加特效
+#homepage {
+  padding-top: 120px;
+  overflow: hidden;
+
+  header {
+    text-align: center;
+
+    img {
+        @media screen and (max-width: 360px){
+          width: 80%;
+        }
+    }
+  }
+}
+
+.back-header {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 300px;
+  width: 100%;
+  background: linear-gradient(45deg, gray 0%,white 100%);
+  background: -moz-linear-gradient(45deg, gray 0%,white 100%);
+  background: -webkit-linear-gradient(45deg, gray 0%,white 100%);
+  background: -o-linear-gradient(45deg, gray 0%,white 100%);
+  color: white;
+}
+.card {
+  position: relative;
+  background-color: white;
+  @media screen and (min-width: 801px){
+    padding: @card-padding;
+  }
+  @media screen and (max-width: 800px){
+    padding: @card-padding-mobile;
+  }
+  
+  margin: 10px auto;
+  box-shadow: 1px 1px 10px lightgray;
+  -mozbox-shadow: 1px 1px 10px lightgray;
+  -webkit-box-shadow: 1px 1px 10px lightgray;
+  -o-box-shadow: 1px 1px 10px lightgray;
+  max-width: 800px;
+}
+
+section {
+  margin: 40px auto;
+}
+
+// 特点描述部分样式
+#feature {
+  display: flex; /* Chrome 29+, Firefox 22+, IE 11+, Opera 12.1/17/18, Android 4.4+ */  
+  display: -webkit-flex; /* Chrome 21+, Safari 6.1+, iOS Safari 7+, Opera 15/16 */ 
+  display: -moz-flex; /* Firefox 18+ */  
+
+  @media screen and (min-width: 801px){
+    -webkit-flex-direction: row;
+    -moz-flex-direction: row;
+    flex-direction: row;
+  }
+  @media screen and (max-width: 800px){
+    -webkit-flex-direction: column;
+    -moz-flex-direction: column;
+    flex-direction: column;
+  }
+
+  > article {
+    width: 100%;
+
+    > p {
+      width: 90%;
+    }
+  }
+}
+
+// 实例部分样式
+#example {
+  .chart-container {
+    display: -webkit-flex;
+    display: flex;
+    @media screen and (min-width: 801px){
+      -webkit-flex-direction: row;
+      -moz-flex-direction: row;
+      flex-direction: row;
+    }
+    @media screen and (max-width: 800px){
+      -webkit-flex-direction: column;
+      -moz-flex-direction: column;
+      flex-direction: column;
+    }
+    padding: 20px 10px;
+    border-bottom: thin solid lightgray;
+    > .intro {
+      width: 100%;
+      
+      > p {
+        width: 90%;
+      }
+    }
+
+    > .chart {
+      width: 100%;
+    }
+  }
+}

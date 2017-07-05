@@ -1,0 +1,39 @@
+{
+  "name": "tcharts.org",
+  "version": "1.0.0",
+  "description": "Website for tcharts.org http://tcharts.org/",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "start": "webpack-dev-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TCharts/tcharts.org.git"
+  },
+  "keywords": [
+    "tcharts",
+    "website"
+  ],
+  "author": "ZiQiangWang",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TCharts/tcharts.org/issues"
+  },
+  "homepage": "https://github.com/TCharts/tcharts.org#readme",
+  "devDependencies": {
+    "css-loader": "^0.28.4",
+    "extract-text-webpack-plugin": "^2.1.2",
+    "file-loader": "^0.11.2",
+    "html-loader": "^0.4.5",
+    "html-webpack-plugin": "^2.29.0",
+    "less": "^2.7.2",
+    "less-loader": "^4.0.4",
+    "open-browser-webpack-plugin": "0.0.5",
+    "style-loader": "^0.18.2",
+    "url-loader": "^0.5.9",
+    "webpack": "^3.0.0",
+    "webpack-dev-server": "^2.5.0"
+  }
+}
