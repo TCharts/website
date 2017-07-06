@@ -1,13 +1,10 @@
 .fade-in {
+  opacity: 0;
   transform-origin:0% 100%;
-  -moz-transform-origin:0% 100%;
-  -webkit-transform-origin:0% 100%;
-  -o-transform-origin:0% 100%;
   animation:rotate 1.5s;
-  -moz-animation:rotate 1.5s; /* Firefox */
-  -webkit-animation:rotate 1.5s; /* Safari and Chrome */
-  -o-animation:rotate 1.5s; /* Opera */
   animation-delay: .2s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode : forwards;
 }
 
 @keyframes rotate
@@ -18,21 +15,10 @@
   }
   to {
     opacity: 1;
-    transform:rotate(0);
+    transform:none;
   }
 }
 
-@-moz-keyframes rotate /* Firefox */
-{
-  from {
-    opacity: 0;
-    -moz-transform:rotate(15deg);  /* Firefox */
-  }
-  to {
-    opacity: 1;
-    -moz-transform:rotate(0);  /* Firefox */
-  }
-}
 
 @-webkit-keyframes rotate /* Safari 和 Chrome */
 {
@@ -42,18 +28,6 @@
   }
   to {
     opacity: 1;
-    -webkit-transform:rotate(0); /* Safari 和 Chrome */
-  }
-}
-
-@-o-keyframes rotate /* Opera */
-{
-  from {
-    opacity: 0;
-    -o-transform:rotate(15deg);  /* Opera */
-  }
-  to {
-    opacity: 1;
-    -o-transform:rotate(0);  /* Opera */
+    -webkit-transform:none; /* Safari 和 Chrome */
   }
 }
