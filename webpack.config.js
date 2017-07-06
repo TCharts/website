@@ -9,6 +9,7 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
+    publicPath: 'dist/',
     filename: 'js/[name].bundle.js'
   },
   module: {
@@ -23,7 +24,7 @@ module.exports = {
       },
       {
         test: /\.(png|jpg|svg|gif)$/,
-        use: [ 'url-loader?limit=128&name=images/[hash:8].[name].[ext]' ]
+        use: [ 'url-loader?limit=8192&name=images/[hash:8].[name].[ext]' ]
       },
       {
         test: /\.html$/,
@@ -38,7 +39,7 @@ module.exports = {
       minChunks: Infinity
     }),
     // css文件导出
-    new extractTextPlugin("./css/style.css"),
+    new extractTextPlugin("css/style.css"),
     // 代码混淆
     new webpack.optimize.UglifyJsPlugin({
       output: { comments: false },
@@ -47,7 +48,7 @@ module.exports = {
     // html文件导出
     new htmlWebpackPlugin({
       template: './src/index.html',
-      filename: './index.html',
+      filename: '../index.html',
       inject: 'body',
     }),
     // 打开浏览器
