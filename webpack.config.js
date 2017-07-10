@@ -3,13 +3,21 @@ var path = require('path');
 var extractTextPlugin = require("extract-text-webpack-plugin");
 var htmlWebpackPlugin = require('html-webpack-plugin');
 var openBrowserPlugin = require('open-browser-webpack-plugin');
+
+// 定义路径
+const PATHS = {
+    root: path.resolve(__dirname),
+    src: path.resolve(__dirname, 'src'),
+    dist: path.resolve(__dirname, 'dist'),
+    node_modules: path.resolve(__dirname, 'node_modules')
+};
+
 module.exports = {
   entry: {
     app: './src/js/app.js',
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    publicPath: 'dist/',
     filename: 'js/[name].bundle.js'
   },
   module: {
@@ -29,6 +37,17 @@ module.exports = {
       {
         test: /\.html$/,
         use: [ 'html-loader' ]
+      },
+      {
+        test: /\.js$/,
+        use: {
+          loader:'babel-loader',
+          options: {
+            presets: ['babel-preset-es2015']
+          }
+        },
+        exclude: PATHS.node_modules,
+        include: PATHS.src
       },
     ]
   },
