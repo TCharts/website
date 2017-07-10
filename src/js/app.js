@@ -1,19 +1,24 @@
 import '../less/container.less';
 import { Box, Bar, HBar, Table } from './tcharts.min.js';
 
-const createClick = () => {
-    const createBtn = document.getElementById('create');
-    createBtn.onclick = handleClickCreate;
-}
+// const createClick = () => {
+//     const createBtn = document.getElementById('create');
+//     createBtn.onclick = handleClickCreate;
+// }
 
 const handleClickCreate = () => {
     const input = document.querySelectorAll('#input textarea')[0];
     let str_value = input.value;
     str_value = str_value.replace(/[\r\n]/g, '');
-    const json_value = JSON.parse(str_value);
-
+    let json_value;
+    try {
+      json_value = JSON.parse(str_value);
+    }
+    catch(e) {
+      alert(e);
+    }
     const chartType = document.getElementById('chart-type');
-    console.log(typeof chartType.value)
+
     let chart;
     switch(chartType.value) {
       case '0':
@@ -31,11 +36,15 @@ const handleClickCreate = () => {
       default:
         chart = new Bar(60,20);
     }
-
-    chart.setData(json_value);
+    try {
+      chart.setData(json_value);
+    } 
+    catch(e) {
+      alert(e);
+    }
 
     const output = document.querySelectorAll('#output textarea')[0];
     output.value = chart.string();
 }
 
-createClick();
+window.handleClickCreate = handleClickCreate;
