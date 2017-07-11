@@ -6,9 +6,8 @@ var openBrowserPlugin = require('open-browser-webpack-plugin');
 
 // 定义路径
 const PATHS = {
-    root: path.resolve(__dirname),
     src: path.resolve(__dirname, 'src'),
-    dist: path.resolve(__dirname, 'dist'),
+    dist: path.resolve(__dirname),
     node_modules: path.resolve(__dirname, 'node_modules')
 };
 
@@ -17,7 +16,7 @@ module.exports = {
     app: './src/js/app.js',
   },
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: PATHS.dist,
     filename: 'js/[name].bundle.js'
   },
   module: {
@@ -25,18 +24,19 @@ module.exports = {
       {
         test: /\.less$/,
         use: extractTextPlugin.extract({
-            fallback: "style-loader",
-            use: ['css-loader?importLoaders=1&minimize=1','postcss-loader','less-loader']
+          fallback: "style-loader",
+          use: ['css-loader?importLoaders=1&minimize=1','postcss-loader','less-loader'],
+          publicPath: PATHS.dist
         }),
         exclude: path.resolve(__dirname, 'node_modules'),
       },
       {
         test: /\.(png|jpg|svg|gif)$/,
-        use: [ 'url-loader?limit=8192&name=images/[hash:8].[name].[ext]' ]
+        use: [ 'url-loader?limit=128&name=images/[hash:8].[name].[ext]' ]
       },
       {
         test: /\.html$/,
-        use: [ 'html-loader' ]
+        use: [ 'html-loader' ],
       },
       {
         test: /\.js$/,
@@ -57,22 +57,29 @@ module.exports = {
       name: 'vendor',
       minChunks: Infinity
     }),
-    // css文件导出
+    // css 文件导出
     new extractTextPlugin("css/style.css"),
     // 代码混淆
     new webpack.optimize.UglifyJsPlugin({
       output: { comments: false },
       compress: { warnings: false }
     }),
-    // html文件导出
+    // html 文件导出
     new htmlWebpackPlugin({
       template: './src/index.html',
-      filename: '../index.html',
+      filename: './index.html',
       inject: 'body',
+      favicon: './src/images/favicon.ico',
+      minify: {
+        collapseBooleanAttributes: true,
+        collapseWhitespace: true,
+        collapseInlineTagWhitespace: true,
+        removeComments: true,
+      }
     }),
     // 打开浏览器
     new openBrowserPlugin({
       url: 'http://localhost:8080'
     })
-  ]
-}
+  ],
+};
