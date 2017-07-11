@@ -1,50 +1,66 @@
 import '../less/container.less';
 import { Box, Bar, HBar, Table } from './tcharts.min.js';
 
-// const createClick = () => {
-//     const createBtn = document.getElementById('create');
-//     createBtn.onclick = handleClickCreate;
-// }
+let timer = null; // 定时器，定时刷新随机图表
 
-const handleClickCreate = () => {
-    const input = document.querySelectorAll('#input textarea')[0];
-    let str_value = input.value;
-    str_value = str_value.replace(/[\r\n]/g, '');
-    let json_value;
-    try {
-      json_value = JSON.parse(str_value);
-    }
-    catch(e) {
-      alert(e);
-    }
-    const chartType = document.getElementById('chart-type');
+const randomTableData = () => {
+  // TODO
+  return [
+    ['id', 'name', 'birthday'],
+    ['#1', 'xiaowei', '1992-08-01'],
+    ['#2', 'hello', '1992-09-20'],
+    ['#3', 'tcharts', '2017-06-27'],
+    ['#4', 'world'],
+  ];
+};
 
-    let chart;
-    switch(chartType.value) {
-      case '0':
-        chart = new Bar(60,20);
-        break;
-      case '1':
-        chart = new HBar(60,20);
-        break;
-      case '2':
-        chart = new Table();
-        break;
-      case '3':
-        chart = new Box(60,20);
-        break;
-      default:
-        chart = new Bar(60,20);
-    }
-    try {
-      chart.setData(json_value);
-    } 
-    catch(e) {
-      alert(e);
-    }
+const randomBoxData = () => {
+  return [
+    {value:100, name:'A'},
+    {value:100, name:'B'},
+    {value:100, name:'C'},
+    {value:100, name:'Hello'},
+  ];
+};
 
-    const output = document.querySelectorAll('#output textarea')[0];
-    output.value = chart.string();
-}
+const randomBarData = () => {
+  return [
+    {value:100, name:'A'},
+    {value:45, name:'B'},
+    {value:70, name:'C'},
+    {value:30, name:'D'},
+  ];
+};
 
-window.handleClickCreate = handleClickCreate;
+/**
+ * 随机图表，并绘制到网页上
+ */
+const randomCharts = () => {
+  const boxData = randomBoxData();
+  const barData = randomBarData();
+  const tableData = randomTableData();
+
+  const bar = new Bar(40, 20);
+  bar.setData(barData);
+  const hbar = new HBar(40, 20);
+  hbar.setData(barData);
+  const box = new Box(40, 20);
+  box.setData(boxData);
+  const table = new Table(0.2);
+  table.setData(tableData);
+
+  document.querySelector('.chart.box pre').innerHTML = box.string();
+  document.querySelector('.chart.bar pre').innerHTML = bar.string();
+  document.querySelector('.chart.hbar pre').innerHTML = hbar.string();
+  document.querySelector('.chart.table pre').innerHTML = table.string();
+};
+
+const randomChartTimer = () => {
+  // 如果存在，清除定时
+  if (timer) clearTimeout(timer);
+  timer = setTimeout(randomCharts(), 3000);
+};
+
+randomChartTimer();
+
+window.randomCharts = randomCharts;
