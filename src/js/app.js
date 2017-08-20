@@ -1,7 +1,5 @@
+import { Box, Bar, HBar, Table } from 'tcharts.js';
 import '../less/container.less';
-import { Box, Bar, HBar, Table } from './tcharts.min.js';
-
-let timer = null; // 定时器，定时刷新随机图表
 
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -34,9 +32,9 @@ const randomCharts = () => {
 
   const bar = new Bar();
   bar.setData(data);
-  const hbar = new HBar();
+  const hbar = new HBar(6, 2);
   hbar.setData(data);
-  const box = new Box(40, 20);
+  const box = new Box(30, 10);
   box.setData(data);
   const table = new Table(0.2);
   table.setData(tableData);

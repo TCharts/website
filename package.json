@@ -43,5 +43,8 @@
     "url-loader": "^0.5.9",
     "webpack": "^3.0.0",
     "webpack-dev-server": "^2.5.0"
+  },
+  "dependencies": {
+    "tcharts.js": "^0.0.3"
   }
 }
